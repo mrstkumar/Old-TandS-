@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SendIt 2023 Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #main-content {
+            margin-top: 20px;
+        }
+
+        button {
+            margin-right: 10px;
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+            {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f7f7;
+        }
+
+        .container {
+            display: flex;
+            border: 80px solid #e0e0e0;
+            border-radius: 1px;
+            overflow: auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.8s;
+        }
+
+        .container:hover {
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: width 0.3s;
+            border-right: 1px solid #34495e;
+        }
+
+        .container:hover .sidebar {
+            width: 250px;
+        }
+
+        .sidebar-avatar {
+            margin-bottom: 20px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            transition: transform 0s;
+        }
+
+        .sidebar-avatar:hover {
+            transform: scale(1.1);
+        }
+
+        .sidebar-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar li {
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar li:hover {
+            background-color: #34495e;
+        }
+
+        .sidebar button {
+            background-color: #3498db;
+            border: none;
+            color: #ecf0f1;
+            padding: 10px 20px;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar button:hover {
+            background-color: #2980b9;
+        }
+
+        .sidebar button i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        .sidebar input[type="file"] {
+            display: none;
+        }
+
+        .sidebar label {
+            background-color: #3498db;
+            color: #ecf0f1;
+            padding: 20px 0;
+            width: 100%;
+            text-align: center;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            font-weight: bold;
+        }
+
+        .sidebar label:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .content h1 {
+            margin-top: 0;
+        }
+
+        .header {
+            background-color: #3498db;
+            color: #ecf0f1;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Verify an Employee today...<span style='font-size:100px;'>&#9996;</span></h1>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-avatar">
+                <img src="default-avatar.jpg" alt="Avatar">
+            </div>
+            <input type="file" id="avatar" accept="image/*">
+            <label for="avatar">Profile Picture</label><br>
+            <ul>
+                <li><button onclick="startVideoCall()"><i class="fas fa-video"></i> Schedule Interview Now</button></li>
+                <li><button onclick="loadContent('user-account')"><i class="fas fa-user"></i> User Account</button></li>
+                <li><button onclick="logoutAndRedirect()"><i class="fas fa-sign-out-alt"></i> Logout</button></li>
+            </ul>
+        </div>
+        <div class="content" id="main-content">
+            <!-- Content from individual sections will be loaded here dynamically -->
+        </div>
+    </div>
+
+    <!-- Button for the years -->
+    <div>
+        <button onclick="goTo2020()">GS-I (2015)</button>
+        <button onclick="goTo2021()">GS-II (2015)</button>
+        <button onclick="goTo2021()">GS-I (2016)</button>
+        <button onclick="goTo2021()">GS-II (2016)</button>
+        <button onclick="goTo2021()">GS-I (2017)</button>
+        <button onclick="goTo2021()">GS-II (2017)</button>
+        <button onclick="goTo2021()">GS-I (2018)</button>
+        <button onclick="goTo2021()">GS-II (2018)</button>
+        <button onclick="goTo2021()">GS-I (2019)</button>
+        <button onclick="goTo2021()">GS-II (2019)</button>
+        <button onclick="goTo2021()">GS-I (2020)</button>
+        <button onclick="goTo2021()">GS-II (2020)</button>
+        <button onclick="goTo2021()">GS-I (2021)</button>
+        <button onclick="goTo2021()">GS-II (2021)</button>
+        <button onclick="goTo2021()">GS-I (2022)</button>
+        <button onclick="goTo2021()">GS-II (2022)</button>
+        <button onclick="goTo2021()">GS-I (2023)</button>
+        <button onclick="goTo2021()">GS-II (2023)</button>
+        <button onclick="goTo2021()">GS-I (2024)</button>
+        <button onclick="goTo2021()">GS-II (2024)</button>
+    </div>
+<div>
+        <button onclick="loadContent('user-account')">Previous year Prelims (GS-I & GS-II)</button>
+    </div>
+    <div id="drop-down">
+        <!-- Content will be loaded here -->
+    </div>
+
+    <script>
+        function loadContent(sectionId) {
+            const contentContainer = document.getElementById("main-content");
+            if (sectionId === 'user-account') {
+                contentContainer.innerHTML = `
+                    <button onclick="goToYear(2015, 'GS-I')">GS-I (2015)</button>
+                    <button onclick="goToYear(2015, 'GS-II')">GS-II (2015)</button><br>
+                    <button onclick="goToYear(2016, 'GS-I')">GS-I (2016)</button>
+                    <button onclick="goToYear(2016, 'GS-II')">GS-II (2016)</button><br>
+                    <button onclick="goToYear(2017, 'GS-I')">GS-I (2017)</button>
+                    <button onclick="goToYear(2017, 'GS-II')">GS-II (2017)</button><br>
+                    <button onclick="goToYear(2018, 'GS-I')">GS-I (2018)</button>
+                    <button onclick="goToYear(2018, 'GS-II')">GS-II (2018)</button><br>
+                    <button onclick="goToYear(2019, 'GS-I')">GS-I (2019)</button>
+                    <button onclick="goToYear(2019, 'GS-II')">GS-II (2019)</button><br>
+                    <button onclick="goToYear(2020, 'GS-I')">GS-I (2020)</button>
+                    <button onclick="goToYear(2020, 'GS-II')">GS-II (2020)</button><br>
+                    <button onclick="goToYear(2021, 'GS-I')">GS-I (2021)</button>
+                    <button onclick="goToYear(2021, 'GS-II')">GS-II (2021)</button><br>
+                    <button onclick="goToYear(2022, 'GS-I')">GS-I (2022)</button>
+                    <button onclick="goToYear(2022, 'GS-II')">GS-II (2022)</button><br>
+                    <button onclick="goToYear(2023, 'GS-I')">GS-I (2023)</button>
+                    <button onclick="goToYear(2023, 'GS-II')">GS-II (2023)</button><br>
+                    <button onclick="goToYear(2024, 'GS-I')">GS-I (2024)</button>
+                    <button onclick="goToYear(2024, 'GS-II')">GS-II (2024)</button><br>
+                `;
+            } else {
+                contentContainer.innerHTML = `<h1>Loading ${sectionId}...</h1>`;
+            }
+        }
+
+        function goToYfunction goToYear(year, paper) {
+            alert(`You selected ${paper} for the year ${year}`);
+            // Add your code to navigate to the selected year and paper
+        }
+    </script>
+    <script>
+        function startVideoCall() {
+            window.location.href = 'C:/Users/lenovo/sendit_app/public/video.html';
+        }
+    </script>
+</body>
+
+</html>

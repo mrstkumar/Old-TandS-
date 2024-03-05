@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Twilio Video Call</title>
+</head>
+<body>
+    <h1>Twilio Video Call</h1>
+    <div id="video-container"></div>
+    <script src="https://media.twiliocdn.com/sdk/js/video/v2/twilio-video.min.js"></script>
+    <script>
+        // Your Twilio Video token obtained from the server
+        const videoToken = "eyJhbGciOiJIUzI1NiIsImN0eSI6InR3aWxpby1mcGE7dj0xIiwidHlwIjoiSldUIn0.eyJqdGkiOiJTS2 UzODA1N2E0YmEzY2M3OWM3OWQ5Njk1M2ZhNmNmMzU2LTE2OTg5Mzg0ODciLCJncmFudHMiOnsidmlkZW8iOnt9LCJpZGVudGl0eSI6InVzZXJuYW1lIn0sImlzcyI6IlNLZTM4MDU3YTRiYTNjYzc5Yzc5ZDk2OTUzZmE2Y2YzNTYiLCJleHAiOjE2OTg5NDIwODcsIm5iZiI6MTY5ODkzODQ4Nywic3ViIjoiQUM0YzRjNWM5OGQ1NDA4N2M4YjRiZTA0NmNlYjAzM2EwZSJ9.D9uljSXLUJ2xPGWozwXhCUP4ZoZmy9RoWVtwtXKatA";
+ // Replace with your actual video token
+
+        // Initialize Twilio Video
+        const Video = Twilio.Video;
+
+        // Connect to the Twilio Video room using the token
+        Video.connect(videoToken, { name: 'your-room-name' }).then(room => {
+            // Display local video in the "video-container" div
+            const localParticipant = room.localParticipant;
+            const localVideoTrack = Array.from(localParticipant.videoTracks.values())[0].track;
+            const localVideoElement = localVideoTrack.attach();
+            document.getElementById('video-container').appendChild(localVideoElement);
+
+            // Handle remote participants and their video tracks
+            room.on('participantConnected', participant => {
+                participant.tracks.forEach(publication => {
+                    if (publication.isSubscribed) {
+                        const remoteVideoTrack = publication.track;
+                        const remoteVideoElement = remoteVideoTrack.attach();
+                        document.getElementById('video-container').appendChild(remoteVideoElement);
+                    }
+                });
+
+                participant.on('trackSubscribed', track => {
+                    if (track.kind === 'video') {
+                        const remoteVideoElement = track.attach();
+                        document.getElementById('video-container').appendChild(remoteVideoElement);
+                    }
+                });
+            });
+
+            // Handle participant disconnection
+            room.on('participantDisconnected', participant => {
+                // Remove participant's video when they disconnect
+                participant.tracks.forEach(publication => {
+                    if (publication.isSubscribed) {
+                        const track = publication.track;
+                        track.detach().forEach(element => element.remove());
+                    }
+                });
+            });
+        }).catch(error => {
+            console.error('Error connecting to the room:', error);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TandS-SignUp</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Set a background gradient for the body with parallax effect */
+body {
+  background: linear-gradient(to bottom, #f6fafd, #b3e0f4);
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Create a container for your content with a shadow and animation */
+.container {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  padding: 40px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Style headings with a subtle shadow and animation */
+h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  animation: fadeInUp 1s ease-in-out;
+}
+
+/* Style the form with a modern and interactive design */
+form {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 2px solid #007bff;
+  border-radius: 20px;
+  background: linear-gradient(to bottom, #ffffff, #f2f2f2);
+  transition: border-color 0.3s, background-color 0.3s;
+  font-size: 16px;
+  color: #333;
+  outline: none;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: #0056b3;
+  background-color: #ffffff;
+}
+
+button[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 18px;
+  margin-top: 20px;
+  transition: background-color 0.3s, transform 0.2s;
+  outline: none;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Style link with a subtle gradient and hover animation */
+#signup-link a {
+  text-decoration: none;
+  color: #007bff;
+  background: linear-gradient(to bottom, transparent 50%, #b3e0f4 50%);
+  background-size: 100% 200%;
+  background-position: 0 0;
+  transition: background-position 0.3s, color 0.3s;
+  font-size: 16px;
+}
+
+#signup-link a:hover {
+  background-position: 0 -100%;
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+/* Style buttons with creative designs and hover animation */
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.buttons button {
+  flex-grow: 1;
+  margin: 0 10px;
+  padding: 16px 28px;
+  background-color: #ff6b6b;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s, transform 0.2s;
+  outline: none;
+}
+
+.buttons button:hover {
+  background-color: #ff3b3b;
+  transform: scale(1.05);
+  animation: bounce 0.5s ease-in-out;
+}
+
+/* Additional styles for specific elements can be added here */
+
+/* Keyframe animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .container {
+    max-width: 90%;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    font-size: 14px;
+  }
+
+  button[type="submit"] {
+    font-size: 16px;
+  }
+}
+</style>
+<body>
+    <div class="container">
+        <h1>Glad to see you with SendIt !!!</h1>
+        <form id="signup-form">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="number">Number</label>
+                <input type="text" id="number" name="number" pattern="[0-9]{10}" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email ID</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="company">Company Name</label>
+                <input type="text" id="company" name="company" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Create Password</label>
+                <input type="password" id="password" name="password" pattern="^(?=.*[0-9])(?=.*[a-zA-Z]).{8,}$" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+            </div>
+            <button type="submit" id="register-btn">Register Now</button>
+        </form>
+        <p id="error-message"></p>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("signup-form");
+            const errorMessage = document.getElementById("error-message");
+
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                // Perform form validation here
+                const name = document.getElementById("name").value;
+                const number = document.getElementById("number").value;
+                const email = document.getElementById("email").value;
+                const company = document.getElementById("company").value;
+                const password = document.getElementById("password").value;
+                const confirmPassword = document.getElementById("confirm-password").value;
+
+                // Check if all fields are filled
+                if (!name || !number || !email || !company || !password || !confirmPassword) {
+                    errorMessage.textContent = "Please fill in all the details.";
+                    return;
+                }
+
+                // Add more validation logic for each field (e.g., email format, password match, etc.)
+
+                // If all validation passes, you can submit the form or redirect to the user dashboard
+                // Here, we're just showing a success message and redirecting after a delay
+                errorMessage.textContent = "Registration successful! Redirecting to the dashboard...";
+
+                // Use a setTimeout to delay the redirection for a few seconds (e.g., 3 seconds)
+                setTimeout(function () {
+                    // Redirect to the dashboard page
+                    window.location.href = "file:///C:/Users/lenovo/sendit_app/public/Dashboard.html";
+                }, 3000); // 3000 milliseconds = 3 seconds
+            });
+        });
+    </script>
+</body>
+</html>
